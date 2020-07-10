@@ -1,3 +1,35 @@
+body {
+    min-width: 320px;
+}
+
 .title {
     font-size: 50px;
+}
+
+.buttons_container {
+    font-size: 16px;
+    padding: 10px;
+    border: 2px solid darkblue;
+}
+
+.list_button {
+    background-color: transparent;
+    padding: 5px;
+    border: 3px solid #ff9308;
+    border-radius: 20px;
+}
+
+.list_button:hover {
+    border-color: #ff6f00;
+}
+
+.list_button:focus {
+    outline: none;
+    border-color: #ffa847;
+    background-color: #00ff00;
+}
+
+.list_button:active {
+    color: #a500ff;
+    border-color: #a500ff;
 }
