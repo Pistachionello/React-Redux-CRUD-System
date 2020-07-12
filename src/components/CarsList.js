@@ -1,9 +1,9 @@
 import React from "react";
 
-export function UserList() {
+export function CarsList() {
     return (
         <div>
-            User List
+            Cars List
         </div>
     );
 }

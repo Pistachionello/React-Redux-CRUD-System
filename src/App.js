@@ -1,16 +1,25 @@
 import React from 'react';
-// import {UserList} from "./components/UserList";
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {useRoutes, ROUTES} from "./hooks/routes";
 
 export function App() {
+    const routes = useRoutes();
+
     return (
-        <div className="container">
-            <div className="title p-4 text-center text-white font-weight-bold bg-primary">
-                React-Redux-CRUD-System
+        <Router>
+            <div className="container">
+                <div className="title p-4 text-center text-white font-weight-bold bg-primary">
+                    React-Redux-CRUD-System
+                </div>
+                <div className="buttons_container d-flex">
+                    <Link className="list_button mr-3" to={ROUTES.USERSLIST}>Users list</Link>
+                    <Link className="list_button" to={ROUTES.CARSLIST}>Cars list</Link>
+                    <Link className="list_button ml-auto" to={ROUTES.DEFAULT}>Close</Link>
+                </div>
+                <div className="current_list">
+                    {routes}
+                </div>
             </div>
-            <div className="buttons_container">
-                <button className="list_button mr-3">Users list</button>
-                <button className="list_button list_button--colored">Cars list</button>
-            </div>
-        </div>
+        </Router>
     );
 }
