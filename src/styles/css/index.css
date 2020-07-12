@@ -13,6 +13,7 @@ body {
 }
 
 .list_button {
+    display: block;
     color: #000000;
     background-color: transparent;
     padding: 5px;

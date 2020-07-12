@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
-import {useRoutes, ROUTES} from "./hooks/routes";
+import {ROUTES} from "./routes/routes";
+import {useRoutes} from "./routes/appRoutes";
 
 export function App() {
     const routes = useRoutes();
@@ -12,8 +13,8 @@ export function App() {
                     React-Redux-CRUD-System
                 </div>
                 <div className="buttons_container d-flex">
-                    <Link className="list_button mr-3" to={ROUTES.USERSLIST}>Users list</Link>
-                    <Link className="list_button" to={ROUTES.CARSLIST}>Cars list</Link>
+                    <Link className="list_button mr-3" to={ROUTES.usersList}>Users list</Link>
+                    <Link className="list_button" to={ROUTES.carsList}>Cars list</Link>
                     <Link className="list_button ml-auto" to={ROUTES.DEFAULT}>Close</Link>
                 </div>
                 <div className="current_list">
