@@ -11,7 +11,7 @@ if (usersList) {
     initialState = usersList;
 }
 
-export const usersReducer = (state= initialState, action) => {
+export const usersReducer = (state = initialState, action) => {
     let newState;
 
     switch (action.type) {
@@ -19,11 +19,13 @@ export const usersReducer = (state= initialState, action) => {
             newState = [];
             localStorage.removeItem("usersList");
             return newState;
+
         case actionTypes.ADD_USER:
             const newUser = action.payload;
             newState = [...state, newUser];
             localStorage.setItem("usersList", JSON.stringify(newState));
             return newState;
+
         default:
             return state;
     }

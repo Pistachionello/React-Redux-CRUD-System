@@ -1,9 +1,10 @@
 import React from "react";
 
-export function User(props) {
+export default function User(props) {
     const {name, surname} = props.user;
+
     return (
-        <div>
+        <div className="user_container">
             {name} {surname}
         </div>
     );
