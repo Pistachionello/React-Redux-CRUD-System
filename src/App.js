@@ -8,11 +8,11 @@ export function App() {
 
     return (
         <Router>
-            <div className="container">
+            <div className="app container">
                 <div className="title p-4 text-center text-white font-weight-bold bg-primary">
                     React-Redux-CRUD-System
                 </div>
-                <div className="buttons_container d-flex">
+                <div className="app_buttons_container d-flex">
                     <Link className="list_button mr-3" to={ROUTES.usersList}>Users list</Link>
                     <Link className="list_button" to={ROUTES.carsList}>Cars list</Link>
                     <Link className="list_button ml-auto" to={ROUTES.DEFAULT}>Close</Link>

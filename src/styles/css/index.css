@@ -6,7 +6,7 @@ body {
     font-size: 50px;
 }
 
-.buttons_container {
+.app_buttons_container {
     font-size: 16px;
     padding: 10px;
     border: 2px solid darkblue;
@@ -36,4 +36,69 @@ body {
 .list_button:active {
     color: #a500ff;
     border-color: #a500ff;
+}
+
+.buttons_container {
+    background-color: #ffffffD9;
+}
+
+.right_center {
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.image {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.image:focus {
+    outline: none;
+}
+
+.crud_button {
+    height: 24px;
+    width: 24px;
+}
+
+.crud_button_sm {
+    height: 16px;
+    width: 16px;
+}
+
+.crud_edit {
+    background-image: url("../../images/edit.svg");
+}
+
+.crud_remove {
+    background-image: url("../../images/remove.svg");
+}
+
+.crud_edit:hover {
+    background-image: url("../../images/edit_hover.svg");
+}
+
+.crud_remove:hover {
+    background-image: url("../../images/remove_hover.svg");
+}
+
+.crud_edit:focus {
+    background-image: url("../../images/edit_hover.svg");
+}
+
+.crud_remove:focus {
+    background-image: url("../../images/remove_hover.svg");
+}
+
+.crud_edit:active {
+    background-image: url("../../images/edit.svg");
+}
+
+.crud_remove:active {
+    background-image: url("../../images/remove.svg");
 }
