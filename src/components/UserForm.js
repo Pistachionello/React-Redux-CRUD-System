@@ -36,7 +36,7 @@ export function UserForm() {
 
     const labels = Object.values(userDependencies);
     return (
-        <div className="user_creating_form">
+        <div className="user_creating_form border-secondary border-left border-bottom pl-3 pb-3 mb-2">
             {Object.entries(formData).map(([key, value], i) => {
                 return (
                     <div key={key + i} className="form_item_container">

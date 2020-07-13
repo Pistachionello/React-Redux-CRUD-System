@@ -11,7 +11,7 @@ export function UsersList() {
 
     return (
         <div className={"users_list mt-3"}>
-            <div className="users_nav_bar d-flex">
+            <div className="users_nav_bar d-flex mb-2">
                 <button className="btn btn-outline-primary" onClick={() => setInCreate(!inCreate)}>
                     Add user to list
                 </button>

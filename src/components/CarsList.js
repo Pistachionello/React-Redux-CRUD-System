@@ -11,7 +11,7 @@ export function CarsList() {
 
     return (
         <div className={"cars_list mt-3"}>
-            <div className="cars_nav_bar d-flex">
+            <div className="cars_nav_bar d-flex mb-2">
                 <button className="btn btn-outline-primary" onClick={() => setInCreate(!inCreate)}>
                     Add car to list
                 </button>
