@@ -1,55 +1,36 @@
 import React, {useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {addUser} from "../redux/actions";
+import {deleteAllUsers} from "../redux/actions";
+import {User} from "./User";
+import {UserForm} from "./UserForm";
 
 export function UsersList() {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users);
 
     const [inCreate, setInCreate] = useState(false);
-    const [inputText, setInputText] = useState("");
-
-    function handleEnterPress(event) {
-        if (event.key === 'Enter') {
-            return true;
-        }
-    }
-
-    function addUserToList(event) {
-        if (handleEnterPress(event) && inputText) {
-            dispatch(addUser(inputText));
-            setInputText("");
-        }
-    }
 
     return (
         <div className={"users_list mt-3"}>
             <div className="users_nav_bar d-flex">
-                <button className="list_button" onClick={() => setInCreate(!inCreate)}>
-                    Create user
+                <button className="btn btn-outline-primary" onClick={() => setInCreate(!inCreate)}>
+                    Add user to list
+                </button>
+                <button className="btn btn-outline-danger ml-auto" onClick={() => dispatch(deleteAllUsers())}>
+                    Delete all users
                 </button>
             </div>
-            {inCreate &&
-            (
-                <div>
-                    <input
-                        type="text"
-                        name={"user_name"}
-                        value={inputText}
-                        onChange={event => setInputText(event.target.value)}
-                        onKeyPress={addUserToList}
-                    />
-                </div>
-            )
-            }
+            {inCreate && <UserForm/>}
             <div className="user_list_container">
-                {users.map((user, id) => {
+                {users.length ? users.map((user, id) => {
                     return (
-                        <div key={user + id}>
-                            {user.name}
-                        </div>
-                    );
-                })}
+                        <User key={user + id} user={user}/>
+                    )
+                }) : (
+                    <div>
+                        There is no users. Create some mb? :)
+                    </div>
+                )}
             </div>
         </div>
     );

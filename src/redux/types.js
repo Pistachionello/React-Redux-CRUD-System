@@ -1,1 +1,2 @@
 export const ADD_USER = "USER/ADD_USER";
+export const DELETE_ALL_USERS = "USER/DELETE_ALL_USERS";
