@@ -23,7 +23,7 @@ export function CarsList() {
             <div className="cars_list_container">
                 {cars.length ? cars.map((car, id) => {
                     return (
-                        <Car key={car + id} car={car}/>
+                        <Car key={car + id} car={car} id={id}/>
                     )
                 }) : (
                     <div>

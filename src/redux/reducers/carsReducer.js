@@ -12,19 +12,28 @@ if (carsList) {
 }
 
 export const carsReducer = (state = initialState, action) => {
-    let newState;
-
     switch (action.type) {
-        case actionTypes.DELETE_ALL_CARS:
-            newState = [];
-            localStorage.removeItem("carsList");
-            return newState;
-
         case actionTypes.ADD_CAR:
+        {
             const newCar = action.payload;
-            newState = [...state, newCar];
+            const newState = [...state, newCar];
             localStorage.setItem("carsList", JSON.stringify(newState));
             return newState;
+        }
+
+        case actionTypes.DELETE_CAR_BY_ID:
+        {
+            const carIdToDelete = action.payload;
+            const newState = state.filter((car, id) => id !== carIdToDelete);
+            localStorage.setItem("carsList", JSON.stringify(newState));
+            return newState;
+        }
+
+        case actionTypes.DELETE_ALL_CARS:
+        {
+            localStorage.removeItem("carsList");
+            return [];
+        }
 
         default:
             return state;

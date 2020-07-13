@@ -7,6 +7,13 @@ export function addUser(user) {
     };
 }
 
+export function removeUserById(id) {
+    return {
+        type: actionTypes.DELETE_USER_BY_ID,
+        payload: id
+    };
+}
+
 export function deleteAllUsers() {
     return {
         type: actionTypes.DELETE_ALL_USERS,
@@ -17,6 +24,13 @@ export function addCar(car) {
     return {
         type: actionTypes.ADD_CAR,
         payload: car
+    };
+}
+
+export function removeCarById(id) {
+    return {
+        type: actionTypes.DELETE_CAR_BY_ID,
+        payload: id
     };
 }
 

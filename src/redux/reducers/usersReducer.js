@@ -12,19 +12,28 @@ if (usersList) {
 }
 
 export const usersReducer = (state = initialState, action) => {
-    let newState;
-
     switch (action.type) {
-        case actionTypes.DELETE_ALL_USERS:
-            newState = [];
-            localStorage.removeItem("usersList");
-            return newState;
-
         case actionTypes.ADD_USER:
+        {
             const newUser = action.payload;
-            newState = [...state, newUser];
+            const newState = [...state, newUser];
             localStorage.setItem("usersList", JSON.stringify(newState));
             return newState;
+        }
+
+        case actionTypes.DELETE_USER_BY_ID:
+        {
+            const userIdToDelete = action.payload;
+            const newState = state.filter((user, id) => id !== userIdToDelete);
+            localStorage.setItem("usersList", JSON.stringify(newState));
+            return newState;
+        }
+
+        case actionTypes.DELETE_ALL_USERS:
+        {
+            localStorage.removeItem("usersList");
+            return [];
+        }
 
         default:
             return state;

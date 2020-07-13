@@ -23,7 +23,7 @@ export function UsersList() {
             <div className="user_list_container">
                 {users.length ? users.map((user, id) => {
                     return (
-                        <User key={user + id} user={user}/>
+                        <User key={user + id} user={user} id={id}/>
                     )
                 }) : (
                     <div>
