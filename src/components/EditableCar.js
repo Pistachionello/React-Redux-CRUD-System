@@ -1,16 +1,17 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {editUserById} from "../redux/actions";
-import User, {userDependencies} from "../Objects/User";
+import {editCarById} from "../redux/actions";
+import Car, {carDependencies} from "../Objects/Car";
 import {isEqual} from "lodash";
 
-export default function EditableUser(props) {
+export default function EditableCar(props) {
     const dispatch = useDispatch();
-    const {name, surname} = props.user
-    const labels = Object.entries(userDependencies);
+    const {name, brand, mileage} = props.car
+    const labels = Object.entries(carDependencies);
     const [formData, setFormData] = useState({
         name,
-        surname
+        brand,
+        mileage
     });
 
     function handleDataChanges(event) {
@@ -28,21 +29,21 @@ export default function EditableUser(props) {
             return !!value.trim();
         });
 
-        const initialUser = {name, surname}
+        const initialCar = {name, brand, mileage}
 
-        if (isValid && !isEqual(initialUser, formData)) {
-            const {name, surname} = formData;
-            const user = new User(name, surname);
+        if (isValid && !isEqual(initialCar, formData)) {
+            const {name, brand, mileage} = formData;
+            const car = new Car(name, brand, mileage);
             props.onEditCancel();
-            dispatch(editUserById(props.id, user));
-        } else if (isEqual(initialUser, formData)) {
+            dispatch(editCarById(props.id, car));
+        } else if (isEqual(initialCar, formData)) {
             props.onEditCancel();
         }
     }
 
     return (
-        <div className="user_editing_form border-secondary border-left border-bottom pl-3 pb-3 mb-3">
-            {Object.entries(props.user).map(([key, value], i) => {
+        <div className="car_editing_form border-secondary border-left border-bottom pl-3 pb-3 mb-3">
+            {Object.entries(props.car).map(([key, value], i) => {
                 return (
                     <div className="user_field mb-2" key={key + i}>
                         <div className="label mb-1">

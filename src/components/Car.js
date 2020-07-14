@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {removeCarById} from "../redux/actions";
+import EditableCar from "./EditableCar";
 
 export default function Car(props) {
     const dispatch = useDispatch();
-
     const {name, brand, mileage} = props.car;
     const [mouseInElement, setMouseInElement] = useState(false);
+    const [inEdit, setInEdit] = useState(false);
 
     function handleButtonsDisplay() {
         return mouseInElement ? "visible" : "invisible";
@@ -16,18 +17,22 @@ export default function Car(props) {
         dispatch(removeCarById(props.id));
     }
 
-    return (
-        <div className="car_container border-secondary border-bottom position-relative"
-             onMouseEnter={() => setMouseInElement(true)}
-             onMouseLeave={() => setMouseInElement(false)}
-        >
-            <p>{name}</p>
-            <p>{brand}</p>
-            <p>{mileage}</p>
-            <div className={"buttons_container position-absolute right_center " + handleButtonsDisplay()}>
-                <button className="crud_button crud_view image"/>
-                <button className="crud_button crud_remove image ml-1" onClick={handleDelete}/>
-            </div>
-        </div>
+    function handleEditCancel() {
+        setInEdit(false);
+    }
+
+    return (!inEdit ?
+            <div className="car_container border-secondary border-bottom position-relative"
+                 onMouseEnter={() => setMouseInElement(true)}
+                 onMouseLeave={() => setMouseInElement(false)}
+            >
+                <p>{name}</p>
+                <p>{brand}</p>
+                <p>{mileage}</p>
+                <div className={"buttons_container position-absolute right_center " + handleButtonsDisplay()}>
+                    <button className="crud_button crud_view image" onClick={() => setInEdit(true)}/>
+                    <button className="crud_button crud_remove image ml-3" onClick={handleDelete}/>
+                </div>
+            </div> : <EditableCar car={props.car} id={props.id} onEditCancel={handleEditCancel}/>
     );
 }
