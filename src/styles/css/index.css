@@ -71,32 +71,32 @@ body {
     width: 16px;
 }
 
-.crud_edit {
-    background-image: url("../../images/edit.svg");
+.crud_view {
+    background-image: url("../../images/view.svg");
 }
 
 .crud_remove {
     background-image: url("../../images/remove.svg");
 }
 
-.crud_edit:hover {
-    background-image: url("../../images/edit_hover.svg");
+.crud_view:hover {
+    background-image: url("../../images/view_hover.svg");
 }
 
 .crud_remove:hover {
     background-image: url("../../images/remove_hover.svg");
 }
 
-.crud_edit:focus {
-    background-image: url("../../images/edit_hover.svg");
+.crud_view:focus {
+    background-image: url("../../images/view_hover.svg");
 }
 
 .crud_remove:focus {
     background-image: url("../../images/remove_hover.svg");
 }
 
-.crud_edit:active {
-    background-image: url("../../images/edit.svg");
+.crud_view:active {
+    background-image: url("../../images/view.svg");
 }
 
 .crud_remove:active {

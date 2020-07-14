@@ -29,6 +29,19 @@ export const usersReducer = (state = initialState, action) => {
             return newState;
         }
 
+        case actionTypes.EDIT_USER_BY_ID:
+        {
+            const {id, changes: {name, surname}} = action.payload;
+            const newState = state.map((user, i) => {
+                if (id === i) {
+                    return new User(name, surname);
+                }
+                return user;
+            })
+            localStorage.setItem("usersList", JSON.stringify(newState));
+            return newState;
+        }
+
         case actionTypes.DELETE_ALL_USERS:
         {
             localStorage.removeItem("usersList");

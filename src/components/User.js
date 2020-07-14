@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {removeUserById} from "../redux/actions";
 import {useDispatch} from "react-redux";
+import EditableUser from "./EditableUser";
 
 export default function User(props) {
     const dispatch = useDispatch();
     const {name, surname} = props.user;
     const [mouseInElement, setMouseInElement] = useState(false);
+    const [inEdit, setInEdit] = useState(false);
 
     function handleButtonsDisplay() {
         return mouseInElement ? "visible" : "invisible";
@@ -14,17 +16,21 @@ export default function User(props) {
     function handleDelete() {
         dispatch(removeUserById(props.id));
     }
+    
+    function handleEditCancel() {
+        setInEdit(false);
+    }
 
-    return (
-        <div className="user_container border-secondary border-bottom position-relative"
-             onMouseEnter={() => setMouseInElement(true)}
-             onMouseLeave={() => setMouseInElement(false)}
-        >
-            {name} {surname}
-            <div className={"buttons_container position-absolute right_center " + handleButtonsDisplay()}>
-                <button className="crud_button_sm crud_edit image"/>
-                <button className="crud_button_sm crud_remove image ml-2" onClick={handleDelete}/>
-            </div>
-        </div>
+    return (!inEdit ?
+            <div className="user_container border-secondary border-bottom position-relative"
+                 onMouseEnter={() => setMouseInElement(true)}
+                 onMouseLeave={() => setMouseInElement(false)}
+            >
+                {name} {surname}
+                <div className={"buttons_container position-absolute right_center " + handleButtonsDisplay()}>
+                    <button className="crud_button_sm crud_view image" onClick={() => setInEdit(true)}/>
+                    <button className="crud_button_sm crud_remove image ml-2" onClick={handleDelete}/>
+                </div>
+            </div> : <EditableUser user={props.user} id={props.id} onEditCancel={handleEditCancel}/>
     );
 }

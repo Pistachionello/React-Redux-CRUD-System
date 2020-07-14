@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {deleteAllUsers} from "../redux/actions";
 import User from "./User";
-import {UserForm} from "./UserForm";
+import UserForm from "./UserForm";
 
 export function UsersList() {
     const dispatch = useDispatch();

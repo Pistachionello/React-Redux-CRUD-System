@@ -25,7 +25,7 @@ export default function Car(props) {
             <p>{brand}</p>
             <p>{mileage}</p>
             <div className={"buttons_container position-absolute right_center " + handleButtonsDisplay()}>
-                <button className="crud_button crud_edit image"/>
+                <button className="crud_button crud_view image"/>
                 <button className="crud_button crud_remove image ml-1" onClick={handleDelete}/>
             </div>
         </div>

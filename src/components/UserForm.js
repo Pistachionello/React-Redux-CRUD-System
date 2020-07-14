@@ -3,7 +3,7 @@ import User, {userDependencies} from "../Objects/User"
 import {useDispatch} from "react-redux";
 import {addUser} from "../redux/actions";
 
-export function UserForm() {
+export default function UserForm() {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
@@ -34,13 +34,13 @@ export function UserForm() {
         }
     }
 
-    const labels = Object.values(userDependencies);
+    const labels = Object.entries(userDependencies);
     return (
         <div className="user_creating_form border-secondary border-left border-bottom pl-3 pb-3 mb-2">
             {Object.entries(formData).map(([key, value], i) => {
                 return (
                     <div key={key + i} className="form_item_container">
-                        {labels[i]}
+                        {labels[i][1]}
                         <div className="input_container">
                             <input
                                 type="text"
