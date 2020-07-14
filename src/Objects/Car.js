@@ -4,8 +4,22 @@ export default function Car(name, brand, mileage) {
     this.mileage = mileage;
 }
 
-export const carDependencies = {
-    name: "Name:",
-    brand: "Brand:",
-    mileage: "Mileage:"
+export const carBinder = {
+    inputFields: {
+        name: {
+            label: "Name:",
+            inputType: "text",
+            required: true
+        },
+        brand: {
+            label: "Brand:",
+            inputType: "text",
+            required: true
+        },
+        mileage: {
+            label: "Mileage:",
+            inputType: "number",
+            required: true
+        }
+    }
 }

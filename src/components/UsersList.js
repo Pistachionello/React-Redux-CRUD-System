@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {deleteAllUsers} from "../redux/actions";
 import User from "./User";
-import UserForm from "./UserForm";
+import UserCreationForm from "./UserCreationForm";
 
 export function UsersList() {
     const dispatch = useDispatch();
@@ -19,11 +19,11 @@ export function UsersList() {
                     Delete all users
                 </button>
             </div>
-            {inCreate && <UserForm/>}
+            {inCreate && <UserCreationForm/>}
             <div className="user_list_container">
                 {users.length ? users.map((user, id) => {
                     return (
-                        <User key={user + id} user={user} id={id}/>
+                        <User user={user} id={id} key={user + id}/>
                     )
                 }) : (
                     <div>

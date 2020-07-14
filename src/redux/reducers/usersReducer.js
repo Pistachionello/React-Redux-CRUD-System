@@ -2,8 +2,8 @@ import * as actionTypes from "../types.js";
 import User from "../../Objects/User"
 
 let initialState = [
-    new User("Henry", "Kavill"),
-    new User("John", "Licro")
+    new User("Henry", "Kavill", 40),
+    new User("John", "Licro", 45)
 ];
 
 const usersList = JSON.parse(localStorage.getItem("usersList"));
@@ -31,10 +31,10 @@ export const usersReducer = (state = initialState, action) => {
 
         case actionTypes.EDIT_USER_BY_ID:
         {
-            const {id, changes: {name, surname}} = action.payload;
+            const {id, changes: {name, surname, age}} = action.payload;
             const newState = state.map((user, i) => {
                 if (id === i) {
-                    return new User(name, surname);
+                    return new User(name, surname, age);
                 }
                 return user;
             })

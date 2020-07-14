@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import Car, {carDependencies} from "../Objects/Car";
 import {useDispatch} from "react-redux";
+import Car, {carBinder} from "../Objects/Car";
 import {addCar} from "../redux/actions";
 
-export function CarForm() {
+export default function CarCreationForm() {
     const dispatch = useDispatch();
-
     const [formData, setFormData] = useState({
         name: "",
         brand: "",
@@ -35,18 +34,20 @@ export function CarForm() {
         }
     }
 
-    const labels = Object.values(carDependencies);
     return (
         <div className="car_creating_form border-secondary border-left border-bottom pl-3 pb-3 mb-2">
-            {Object.entries(formData).map(([key, value], i) => {
+            {Object.entries(carBinder.inputFields).map(([key, value], i) => {
+                const {label, inputType} = value;
                 return (
-                    <div key={key + i} className="form_item_container">
-                        {labels[i]}
+                    <div key={key + i} className="form_item_container mb-2">
+                        <div className="label mb-1">
+                            {label}
+                        </div>
                         <div className="input_container">
                             <input
-                                type="text"
+                                type={inputType}
                                 name={key}
-                                value={value}
+                                value={formData[key]}
                                 onChange={handleDataChanges}
                             />
                         </div>

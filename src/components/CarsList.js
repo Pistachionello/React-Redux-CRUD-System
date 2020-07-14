@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {deleteAllCars} from "../redux/actions";
 import Car from "./Car";
-import {CarForm} from "./CarForm";
+import CarCreationForm from "./CarCreationForm";
 
 export function CarsList() {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export function CarsList() {
                     Delete all cars
                 </button>
             </div>
-            {inCreate && <CarForm/>}
+            {inCreate && <CarCreationForm/>}
             <div className="cars_list_container">
                 {cars.length ? cars.map((car, id) => {
                     return (

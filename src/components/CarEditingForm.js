@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {editCarById} from "../redux/actions";
-import Car, {carDependencies} from "../Objects/Car";
+import Car, {carBinder} from "../Objects/Car";
 import {isEqual} from "lodash";
 
-export default function EditableCar(props) {
+export default function CarEditingForm(props) {
     const dispatch = useDispatch();
     const {name, brand, mileage} = props.car
-    const labels = Object.entries(carDependencies);
     const [formData, setFormData] = useState({
         name,
         brand,
@@ -43,17 +42,19 @@ export default function EditableCar(props) {
 
     return (
         <div className="car_editing_form border-secondary border-left border-bottom pl-3 pb-3 mb-3">
-            {Object.entries(props.car).map(([key, value], i) => {
+            {Object.entries(carBinder.inputFields).map(([key, value], i) => {
+                const {label, inputType} = value;
                 return (
-                    <div className="user_field mb-2" key={key + i}>
+                    <div key={key + i} className="form_item_container mb-2">
                         <div className="label mb-1">
-                            {labels[i][1]}
+                            {label}
                         </div>
-                        <div className="value">
-                            <input type="text"
-                                   value={formData[key]}
-                                   name={key}
-                                   onChange={handleDataChanges}
+                        <div className="input_container">
+                            <input
+                                type={inputType}
+                                name={key}
+                                value={formData[key]}
+                                onChange={handleDataChanges}
                             />
                         </div>
                     </div>

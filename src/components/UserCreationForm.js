@@ -1,14 +1,14 @@
 import React, {useState} from "react";
-import User, {userDependencies} from "../Objects/User"
 import {useDispatch} from "react-redux";
 import {addUser} from "../redux/actions";
+import User, {userBinder} from "../Objects/User"
 
-export default function UserForm() {
+export default function UserCreationForm() {
     const dispatch = useDispatch();
-
     const [formData, setFormData] = useState({
         name: "",
-        surname: ""
+        surname: "",
+        age: ""
     });
 
     function handleDataChanges(event) {
@@ -27,25 +27,27 @@ export default function UserForm() {
         });
 
         if (isValid) {
-            const {name, surname} = formData;
-            const user = new User(name, surname)
-            setFormData({name: "", surname: ""})
+            const {name, surname, age} = formData;
+            const user = new User(name, surname, age)
+            setFormData({name: "", surname: "", age: ""})
             dispatch(addUser(user));
         }
     }
 
-    const labels = Object.entries(userDependencies);
     return (
         <div className="user_creating_form border-secondary border-left border-bottom pl-3 pb-3 mb-2">
-            {Object.entries(formData).map(([key, value], i) => {
+            {Object.entries(userBinder.inputFields).map(([key, value], i) => {
+                const {label, inputType} = value;
                 return (
-                    <div key={key + i} className="form_item_container">
-                        {labels[i][1]}
+                    <div key={key + i} className="form_item_container mb-2">
+                        <div className="label mb-1">
+                            {label}
+                        </div>
                         <div className="input_container">
                             <input
-                                type="text"
+                                type={inputType}
                                 name={key}
-                                value={value}
+                                value={formData[key]}
                                 onChange={handleDataChanges}
                             />
                         </div>

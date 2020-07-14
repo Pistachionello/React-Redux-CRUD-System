@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {removeCarById} from "../redux/actions";
-import EditableCar from "./EditableCar";
+import CarEditingForm from "./CarEditingForm";
 
 export default function Car(props) {
     const dispatch = useDispatch();
@@ -33,6 +33,6 @@ export default function Car(props) {
                     <button className="crud_button crud_view image" onClick={() => setInEdit(true)}/>
                     <button className="crud_button crud_remove image ml-3" onClick={handleDelete}/>
                 </div>
-            </div> : <EditableCar car={props.car} id={props.id} onEditCancel={handleEditCancel}/>
+            </div> : <CarEditingForm car={props.car} id={props.id} onEditCancel={handleEditCancel}/>
     );
 }

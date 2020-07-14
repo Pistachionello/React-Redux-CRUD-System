@@ -2,8 +2,8 @@ import * as actionTypes from "../types.js";
 import Car from "../../Objects/Car";
 
 let initialState = [
-    new Car("Some car name 1", "Some car brand 1", "Some car mileage 1"),
-    new Car("Some car name 2", "Some car brand 2", "Some car mileage 2"),
+    new Car("Some car name 1", "Some car brand 1", "400"),
+    new Car("Some car name 2", "Some car brand 2", "200"),
 ];
 
 const carsList = JSON.parse(localStorage.getItem("carsList"));
