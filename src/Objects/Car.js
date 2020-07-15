@@ -1,7 +1,19 @@
-export default function Car(name, brand, mileage) {
+export default function Car(name, brand, mileage, owner = null) {
     this.name = name;
     this.brand = brand;
     this.mileage = mileage;
+    this.owner = owner;
+    this.idNumber = makeId(8);
+}
+
+function makeId(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
 
 export const carBinder = {
@@ -21,5 +33,6 @@ export const carBinder = {
             inputType: "number",
             required: true
         }
-    }
+    },
+    owner: {label: "Owner:"}
 }

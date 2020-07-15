@@ -1,7 +1,8 @@
-export default function User(name, surname, age) {
+export default function User(name, surname, age, ownedCars = []) {
     this.name = name;
     this.surname = surname;
     this.age = age;
+    this.ownedCars = ownedCars;
 }
 
 export const userBinder = {
@@ -21,5 +22,6 @@ export const userBinder = {
             inputType: "number",
             required: true
         }
-    }
+    },
+    ownedCars: {label: "Owned cars:",}
 }

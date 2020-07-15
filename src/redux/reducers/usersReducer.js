@@ -48,7 +48,23 @@ export const usersReducer = (state = initialState, action) => {
             return [];
         }
 
+        case actionTypes.ADD_CAR_TO_USER:
+        {
+            const {userId, car} = action.payload;
+            const newState = state.map((user, i) => {
+                if (userId === i) {
+                    user.ownedCars = [...user.ownedCars, car];
+                    return user;
+                }
+                return user;
+            })
+            localStorage.setItem("usersList", JSON.stringify(newState));
+
+            return newState;
+        }
+
         default:
+            localStorage.setItem("usersList", JSON.stringify(state));
             return state;
     }
 }

@@ -5,7 +5,7 @@ import CarEditingForm from "./CarEditingForm";
 
 export default function Car(props) {
     const dispatch = useDispatch();
-    const {name, brand, mileage} = props.car;
+    const {name, brand, mileage, owner} = props.car;
     const [mouseInElement, setMouseInElement] = useState(false);
     const [inEdit, setInEdit] = useState(false);
 
@@ -26,9 +26,16 @@ export default function Car(props) {
                  onMouseEnter={() => setMouseInElement(true)}
                  onMouseLeave={() => setMouseInElement(false)}
             >
-                <p>{name}</p>
-                <p>{brand}</p>
-                <p>{mileage}</p>
+                <div className="car_info">
+                    <p>Name: {name}</p>
+                    <p>Brand: {brand}</p>
+                    <p>Mileage: {mileage}</p>
+                    {owner ?
+                        <div>Owner: {owner.name} {owner.surname}</div>
+                        :
+                        <div>This car has no owner</div>
+                    }
+                </div>
                 <div className={"buttons_container position-absolute right_center " + handleButtonsDisplay()}>
                     <button className="crud_button crud_view image" onClick={() => setInEdit(true)}/>
                     <button className="crud_button crud_remove image ml-3" onClick={handleDelete}/>
