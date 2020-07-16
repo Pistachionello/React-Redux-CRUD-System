@@ -50,11 +50,10 @@ export const usersReducer = (state = initialState, action) => {
 
         case actionTypes.ADD_CAR_TO_USER:
         {
-            const {userId, car} = action.payload;
+            const {userId, carId} = action.payload;
             const newState = state.map((user, i) => {
                 if (userId === i) {
-                    user.ownedCars = [...user.ownedCars, car];
-                    return user;
+                    user.ownedCarsIds = [...user.ownedCarsIds, carId];
                 }
                 return user;
             })

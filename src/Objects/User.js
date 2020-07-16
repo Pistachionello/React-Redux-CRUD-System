@@ -1,8 +1,8 @@
-export default function User(name, surname, age, ownedCars = []) {
+export default function User(name, surname, age, ownedCarsIds = []) {
     this.name = name;
     this.surname = surname;
     this.age = age;
-    this.ownedCars = ownedCars;
+    this.ownedCarsIds = ownedCarsIds;
 }
 
 export const userBinder = {
@@ -23,5 +23,5 @@ export const userBinder = {
             required: true
         }
     },
-    ownedCars: {label: "Owned cars:",}
+    ownedCarsIds: {label: "Owned cars:",}
 }

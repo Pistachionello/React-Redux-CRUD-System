@@ -45,15 +45,13 @@ export const carsReducer = (state = initialState, action) => {
         }
 
         case actionTypes.ADD_CAR_OWNER: {
-            const {carId, user} = action.payload;
+            const {carId, userId} = action.payload;
             const newState = state.map((car) => {
                 if (car.idNumber === carId) {
-                    const {name, brand, mileage} = car;
-                    return new Car(name, brand, mileage, user);
+                    car.userOwnerId = userId;
                 }
                 return car;
             })
-            // console.log(newState)
             localStorage.setItem("carsList", JSON.stringify(newState));
 
             return newState;

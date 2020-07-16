@@ -6,12 +6,17 @@ import Car from "./Car";
 
 export default function User(props) {
     const dispatch = useDispatch();
-    const {name, surname, age, ownedCars} = props.user;
+    const {name, surname, age, ownedCarsIds} = props.user;
     const [mouseInElement, setMouseInElement] = useState(false);
     const [inEdit, setInEdit] = useState(false);
     const [inBuyingCars, setBuyingCars] = useState(false);
     const cars = useSelector(state => state.cars);
-    const availableCars = cars.filter((car) => !car.owner)
+    const buyAvailableCars = cars.filter((car) => {
+        return typeof car.userOwnerId === "undefined";
+    })
+    const ownedCars = cars.filter((car) => {
+        return ownedCarsIds.includes(car.idNumber);
+    })
 
     function handleButtonsDisplay() {
         return mouseInElement ? "visible" : "invisible";
@@ -24,9 +29,9 @@ export default function User(props) {
     function handleEditCancel() {
         setInEdit(false);
     }
-    
-    function handleBuyCar(car) {
-        dispatch(addCarAndOwner(props.user, car, props.id));
+
+    function handleBuyCar(carId) {
+        dispatch(addCarAndOwner(props.id, carId));
     }
 
     return (!inEdit ?
@@ -42,28 +47,35 @@ export default function User(props) {
                         Owned cars:
                         <div className="cars_container ml-5">
                             {ownedCars.length ? ownedCars.map((car, id) => {
-                                return (
-                                    <div key={car + id}>
-                                        {car.name}
-                                    </div>
-                                );
-                            }) :
+                                    return (
+                                        <div key={car + id}>
+                                            <div>
+                                                {car.name}
+                                            </div>
+                                            <div>
+                                                {car.brand}
+                                            </div>
+                                        </div>
+                                    );
+                                }) :
                                 <div>There is no cars. If you can, buy some.</div>
                             }
                         </div>
                         <div className="user_car_buttons d-flex">
                             {!inBuyingCars ?
-                                <button className="btn btn-outline-success m-2" onClick={() => setBuyingCars(true)}>Buy car</button>
+                                <button className="btn btn-outline-success m-2" onClick={() => setBuyingCars(true)}>Buy
+                                    car</button>
                                 :
                                 <div>
                                     <div className="buying_cars_list border p-3 mt-3">
-                                        {availableCars.length ? availableCars.map((car, id) => {
+                                        {buyAvailableCars.length ? buyAvailableCars.map((car, id) => {
                                             return (
                                                 <div className="car_item" key={car + id}>
                                                     <Car car={car} id={id}/>
-                                                    <button className="btn btn btn-outline-success mt-2" onClick={() => handleBuyCar(car)}>Buy</button>
+                                                    <button className="btn btn btn-outline-success mt-2"
+                                                            onClick={() => handleBuyCar(car.idNumber)}>Buy
+                                                    </button>
                                                 </div>
-
                                             )
                                         }) : (
                                             <div>
@@ -71,7 +83,9 @@ export default function User(props) {
                                             </div>
                                         )}
                                     </div>
-                                    <button className="btn btn-outline-danger m-2" onClick={() => setBuyingCars(false)}>Leave</button>
+                                    <button className="btn btn-outline-danger m-2"
+                                            onClick={() => setBuyingCars(false)}>Leave
+                                    </button>
                                 </div>
                             }
                         </div>

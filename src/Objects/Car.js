@@ -1,8 +1,8 @@
-export default function Car(name, brand, mileage, owner = null) {
+export default function Car(name, brand, mileage, userOwnerId = undefined) {
     this.name = name;
     this.brand = brand;
     this.mileage = mileage;
-    this.owner = owner;
+    this.userOwnerId = userOwnerId;
     this.idNumber = makeId(8);
 }
 
@@ -34,5 +34,5 @@ export const carBinder = {
             required: true
         }
     },
-    owner: {label: "Owner:"}
+    userOwnerId: {label: "Owner:"}
 }

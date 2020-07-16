@@ -29,10 +29,10 @@ export function deleteAllUsers() {
     };
 }
 
-function addCarToUser(userId, car) {
+function addCarToUser(userId, carId) {
     return {
         type: actionTypes.ADD_CAR_TO_USER,
-        payload: {userId, car}
+        payload: {userId, carId}
     };
 }
 
@@ -65,19 +65,18 @@ export function deleteAllCars() {
     };
 }
 
-function addCarOwner(carId, user) {
+function addCarOwner(carId, userId) {
     return {
         type: actionTypes.ADD_CAR_OWNER,
-        payload: {carId, user}
+        payload: {carId, userId}
     };
 }
 
 //--------------------------------------------------
 
-export function addCarAndOwner(user, car, userId) {
+export function addCarAndOwner(userId, carId) {
     return (dispatch) => {
-        dispatch(addCarToUser(userId, car));
-        dispatch(addCarOwner(car.idNumber, user));
+        dispatch(addCarToUser(userId, carId));
+        dispatch(addCarOwner(carId, userId));
     }
-
 }

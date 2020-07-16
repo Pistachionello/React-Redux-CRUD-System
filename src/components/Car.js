@@ -1,13 +1,14 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {removeCarById} from "../redux/actions";
 import CarEditingForm from "./CarEditingForm";
 
 export default function Car(props) {
     const dispatch = useDispatch();
-    const {name, brand, mileage, owner} = props.car;
+    const {name, brand, mileage, userOwnerId} = props.car;
     const [mouseInElement, setMouseInElement] = useState(false);
     const [inEdit, setInEdit] = useState(false);
+    const userOwner = useSelector(state => state.users).find((user, id) => (id === userOwnerId))
 
     function handleButtonsDisplay() {
         return mouseInElement ? "visible" : "invisible";
@@ -30,8 +31,8 @@ export default function Car(props) {
                     <p>Name: {name}</p>
                     <p>Brand: {brand}</p>
                     <p>Mileage: {mileage}</p>
-                    {owner ?
-                        <div>Owner: {owner.name} {owner.surname}</div>
+                    {typeof userOwnerId !== "undefined" ?
+                        <div>Owner: {userOwner.name} {userOwner.surname}</div>
                         :
                         <div>This car has no owner</div>
                     }
