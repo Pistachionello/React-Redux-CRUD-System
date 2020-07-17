@@ -13,7 +13,7 @@ export const userBinder = {
             required: true
         },
         surname: {
-            label: "Surname",
+            label: "Surname:",
             inputType: "text",
             required: true
         },

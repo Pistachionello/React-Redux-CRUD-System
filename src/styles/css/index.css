@@ -102,3 +102,7 @@ body {
 .crud_remove:active {
     background-image: url("../../images/remove.svg");
 }
+
+.errors_container {
+    color: red;
+}
