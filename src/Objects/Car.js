@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 export default function Car(name, brand, mileage, userOwnerId = undefined) {
     this.name = name;
     this.brand = brand;
@@ -36,3 +38,17 @@ export const carBinder = {
     },
     userOwnerId: {label: "Owner:"}
 }
+
+export const validationSchema = Yup.object({
+    name: Yup.string()
+        .max(15, "Must be 15 characters or less")
+        .min(2, "Must be 2 characters or more")
+        .required('Required'),
+    brand: Yup.string()
+        .max(20, "Must be 20 characters or less")
+        .min(3, "Must be 3 characters or more")
+        .required('Required'),
+    mileage: Yup.number()
+        .positive("Your mileage is negative? Wow?!? Tell your secrets")
+        .required('Required'),
+});
