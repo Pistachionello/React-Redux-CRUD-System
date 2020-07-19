@@ -1,19 +1,21 @@
 import React from "react";
+import {Field, ErrorMessage, useFormikContext} from "formik";
 
-export default function FormikInputs({formik, binder}) {
+export default function FormikInputs({binder}) {
+    const {initialValues} = useFormikContext();
     return (
         <>
-            {Object.keys(formik.initialValues).map((key, i) => {
+            {Object.keys(initialValues).map((key, i) => {
                 return (
                     <div className={"formik_input_container mb-2"} key={key + i}>
                         <div className="label_container">
-                            {binder[key]["label"]}
+                            <label htmlFor={key}>{binder[key]["label"]}</label>
                         </div>
                         <div className="input_container">
-                            <input id={key} type={binder[key]["inputType"]}{...formik.getFieldProps(key)}/>
+                            <Field id={key} name={key} type={binder[key]["inputType"]}/>
                         </div>
                         <div className="errors_container">
-                            {formik.touched[key] && formik.errors[key] ? <div>{formik.errors[key]}</div> : null}
+                            <ErrorMessage name={key}/>
                         </div>
                     </div>
                 );
