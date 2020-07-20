@@ -31,7 +31,7 @@ export default function Car(props) {
                     <p>Name: {name}</p>
                     <p>Brand: {brand}</p>
                     <p>Mileage: {mileage}</p>
-                    {typeof userOwnerId !== "undefined" ?
+                    {userOwner ?
                         <div>Owner: {userOwner.name} {userOwner.surname}</div>
                         :
                         <div>This car has no owner</div>

@@ -38,7 +38,7 @@ export default function UserEditingForm({id, onEditCancel, user}) {
                 <FormikInputs binder={userBinder.inputFields}/>
                 <div className="buttons_container d-flex">
                     <button type={"submit"} className="btn btn-outline-success mr-2">Confirm</button>
-                    <button className="btn btn-outline-danger" onClick={() => onEditCancel}>Cancel</button>
+                    <button type={"button"} className="btn btn-outline-danger" onClick={() => onEditCancel()}>Cancel</button>
                 </div>
             </FormikForm>
         </div>

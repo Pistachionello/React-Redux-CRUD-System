@@ -63,7 +63,9 @@ export const usersReducer = (state = initialState, action) => {
         }
 
         default:
-            localStorage.setItem("usersList", JSON.stringify(state));
+            if (state) {
+                localStorage.setItem("usersList", JSON.stringify(state));
+            }
             return state;
     }
 }

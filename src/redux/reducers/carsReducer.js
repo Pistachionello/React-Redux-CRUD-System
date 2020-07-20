@@ -58,7 +58,9 @@ export const carsReducer = (state = initialState, action) => {
         }
 
         default:
-            localStorage.setItem("carsList", JSON.stringify(state));
+            if (state) {
+                localStorage.setItem("carsList", JSON.stringify(state));
+            }
             return state;
     }
 }
