@@ -59,10 +59,10 @@ export function removeCarById(id) {
     };
 }
 
-export function editCarById(id, changes) {
+export function editCarById(idNumber, changes) {
     return {
         type: actionTypes.EDIT_CAR_BY_ID,
-        payload: {id, changes}
+        payload: {idNumber, changes}
     };
 }
 

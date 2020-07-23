@@ -6,10 +6,10 @@ import {isEqual} from "lodash";
 import FormikInputs from "./FormikInputs";
 import FormikForm from "./FormikForm";
 
-export default function CarEditingForm({car, id, onEditCancel = null, onEditConfirm = null}) {
+export default function CarEditingForm({car, onEditCancel = null, onEditConfirm = null}) {
     const dispatch = useDispatch();
 
-    const {name, brand, mileage} = car
+    const {name, brand, mileage, idNumber, userOwnerId} = car
     const initialValues = {
         name,
         brand,
@@ -24,9 +24,9 @@ export default function CarEditingForm({car, id, onEditCancel = null, onEditConf
                 onEditConfirm();
             }
             const {name, brand, mileage} = values;
-            const car = new Car(name, brand, mileage);
+            const car = new Car(name, brand, mileage, userOwnerId);
             onEditCancel();
-            dispatch(editCarById(id, car));
+            dispatch(editCarById(idNumber, car));
         } else if (isEqual(initialCar, values)) {
             onEditCancel();
         }

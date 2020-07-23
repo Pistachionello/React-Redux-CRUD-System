@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {deleteAllCars, removeCarById} from "../redux/actions";
 import CarCreationForm from "./CarCreationForm";
@@ -24,6 +24,16 @@ export function CarsList() {
     const [openInfoAlert, setOpenInfoAlert] = useState(false);
     const [infoAlert, setInfoAlert] = useState(null);
 
+    const [timeoutsIds, setTimeoutsIds] = useState([]);
+
+    useEffect(() => {
+        return () => {
+            timeoutsIds.forEach((timeoutsId) => {
+                clearTimeout(timeoutsId);
+            })
+        }
+    }, [timeoutsIds])
+
     function closeCreationForm() {
         setOpenInCreate(false);
     }
@@ -35,9 +45,9 @@ export function CarsList() {
             </Alert>
         );
         setOpenInfoAlert(true);
-        setTimeout(() => {
+        setTimeoutsIds(prevState => [...prevState, setTimeout(() => {
             setOpenInfoAlert(false);
-        }, 3000);
+        }, 3000)]);
     }
 
     function onCarEdited() {
@@ -47,9 +57,9 @@ export function CarsList() {
             </Alert>
         );
         setOpenInfoAlert(true);
-        setTimeout(() => {
+        setTimeoutsIds(prevState => [...prevState, setTimeout(() => {
             setOpenInfoAlert(false);
-        }, 3000);
+        }, 3000)]);
     }
 
     return (
@@ -100,7 +110,7 @@ export function CarsList() {
                             const car = cars[id];
                             return (
                                 <div>
-                                    <CarInfo car={car} id={id} handleCarEdit={onCarEdited}/>
+                                    <CarInfo car={car} handleCarEdit={onCarEdited}/>
                                 </div>
                             );
                         }
@@ -126,10 +136,10 @@ export function CarsList() {
                             }
                             setOpenImportantAlert(true);
                             setLockDelete(true);
-                            setTimeout(() => {
+                            setTimeoutsIds(prevState => [...prevState, setTimeout(() => {
                                 setOpenImportantAlert(false);
                                 setLockDelete(false);
-                            }, 3000);
+                            }, 3000)]);
                         }
                     }
                 ]}

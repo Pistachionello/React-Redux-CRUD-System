@@ -7,7 +7,7 @@ let initialState = [
 ];
 
 const usersList = JSON.parse(localStorage.getItem("usersList"));
-if (usersList.length) {
+if (usersList?.length) {
     initialState = usersList;
 }
 
@@ -31,10 +31,10 @@ export const usersReducer = (state = initialState, action) => {
 
         case actionTypes.EDIT_USER_BY_ID:
         {
-            const {id, changes: {name, surname, age}} = action.payload;
+            const {id, changes: {name, surname, age, ownedCarsIds}} = action.payload;
             const newState = state.map((user, i) => {
                 if (id === i) {
-                    return new User(name, surname, age);
+                    return new User(name, surname, age, ownedCarsIds);
                 }
                 return user;
             })

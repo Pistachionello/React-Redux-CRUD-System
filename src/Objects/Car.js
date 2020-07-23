@@ -1,11 +1,11 @@
 import * as Yup from "yup";
 
-export default function Car(name, brand, mileage, userOwnerId = undefined) {
+export default function Car(name, brand, mileage, userOwnerId, idNumber) {
     this.name = name;
     this.brand = brand;
     this.mileage = mileage;
     this.userOwnerId = userOwnerId;
-    this.idNumber = makeId(8);
+    this.idNumber = idNumber || makeId(8);
 }
 
 function makeId(length) {

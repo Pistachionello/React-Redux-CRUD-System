@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import MaterialTable from 'material-table';
 import {Alert} from "@material-ui/lab";
@@ -24,6 +24,16 @@ export function UsersList() {
     const [openInfoAlert, setOpenInfoAlert] = useState(false);
     const [infoAlert, setInfoAlert] = useState(null);
 
+    const [timeoutsIds, setTimeoutsIds] = useState([]);
+
+    useEffect(() => {
+        return () => {
+            timeoutsIds.forEach((timeoutsId) => {
+                clearTimeout(timeoutsId);
+            })
+        }
+    }, [timeoutsIds])
+
     function closeCreationForm() {
         setOpenInCreate(false);
     }
@@ -35,9 +45,9 @@ export function UsersList() {
             </Alert>
         );
         setOpenInfoAlert(true);
-        setTimeout(() => {
+        setTimeoutsIds(prevState => [...prevState, setTimeout(() => {
             setOpenInfoAlert(false);
-        }, 3000);
+        }, 3000)]);
     }
 
     function onUserEdited() {
@@ -47,9 +57,9 @@ export function UsersList() {
             </Alert>
         );
         setOpenInfoAlert(true);
-        setTimeout(() => {
+        setTimeoutsIds(prevState => [...prevState, setTimeout(() => {
             setOpenInfoAlert(false);
-        }, 3000);
+        }, 3000)]);
     }
 
     return (
@@ -126,10 +136,10 @@ export function UsersList() {
                             }
                             setOpenImportantAlert(true);
                             setLockDelete(true);
-                            setTimeout(() => {
+                            setTimeoutsIds(prevState => [...prevState, setTimeout(() => {
                                 setOpenImportantAlert(false);
                                 setLockDelete(false);
-                            }, 3000);
+                            }, 3000)]);
                         }
                     }
                 ]}

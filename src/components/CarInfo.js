@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import CarEditingForm from "./CarEditingForm";
 import {carBinder} from "../Objects/Car";
 
-export default function CarInfo({car, id, handleCarEdit}) {
+export default function CarInfo({car, handleCarEdit}) {
     const {userOwnerId} = car;
     const [inEdit, setInEdit] = useState(false);
     const userOwner = useSelector(state => state.users).find((user, id) => (id === userOwnerId))
@@ -45,9 +45,10 @@ export default function CarInfo({car, id, handleCarEdit}) {
                                 :
                                 <div>This car has no owner</div>
                             }
+                            Car idNumber: {car.idNumber}
                         </div>
                     </div>
-                </> : <CarEditingForm car={car} id={id} onEditCancel={handleEditCancel} onEditConfirm={handleCarEdit}/>
+                </> : <CarEditingForm car={car} onEditCancel={handleEditCancel} onEditConfirm={handleCarEdit}/>
             }
         </div>
     );

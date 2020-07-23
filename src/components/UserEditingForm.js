@@ -9,7 +9,7 @@ import FormikInputs from "./FormikInputs";
 export default function UserEditingForm({user, id, onEditCancel = null, onEditConfirm = null}) {
     const dispatch = useDispatch();
 
-    const {name, surname, age} = user;
+    const {name, surname, age, ownedCarsIds} = user;
     const initialValues = {
         name,
         surname,
@@ -24,7 +24,7 @@ export default function UserEditingForm({user, id, onEditCancel = null, onEditCo
                 onEditConfirm();
             }
             const {name, surname, age} = values;
-            const user = new User(name, surname, age);
+            const user = new User(name, surname, age, ownedCarsIds);
             onEditCancel();
             dispatch(editUserById(id, user));
         } else if (isEqual(initialUser, values)) {

@@ -7,7 +7,7 @@ let initialState = [
 ];
 
 const carsList = JSON.parse(localStorage.getItem("carsList"));
-if (carsList.length) {
+if (carsList?.length) {
     initialState = carsList;
 }
 
@@ -28,12 +28,10 @@ export const carsReducer = (state = initialState, action) => {
         }
 
         case actionTypes.EDIT_CAR_BY_ID: {
-            const {id, changes: {name, brand, mileage}} = action.payload;
-            const newState = state.map((car, i) => {
-                if (id === i) {
-                    car.name = name;
-                    car.brand = brand;
-                    car.mileage = mileage;
+            const {idNumber, changes: {name, brand, mileage, userOwnerId}} = action.payload;
+            const newState = state.map((car) => {
+                if (idNumber === car.idNumber) {
+                    return new Car(name, brand, mileage, userOwnerId, idNumber)
                 }
                 return car;
             })
