@@ -7,7 +7,7 @@ let initialState = [
 ];
 
 const usersList = JSON.parse(localStorage.getItem("usersList"));
-if (usersList) {
+if (usersList.length) {
     initialState = usersList;
 }
 
@@ -54,6 +54,25 @@ export const usersReducer = (state = initialState, action) => {
             const newState = state.map((user, i) => {
                 if (userId === i) {
                     user.ownedCarsIds = [...user.ownedCarsIds, carId];
+                }
+                return user;
+            })
+            localStorage.setItem("usersList", JSON.stringify(newState));
+
+            return newState;
+        }
+
+        case actionTypes.DELETE_CAR_FROM_USER:
+        {
+            const {userId, carId} = action.payload;
+            const newState = state.map((user, i) => {
+                if (userId === i) {
+                    user.ownedCarsIds = user.ownedCarsIds.filter((ownedCar) => {
+                        if(ownedCar === carId) {
+                            return false;
+                        }
+                        return ownedCar;
+                    });
                 }
                 return user;
             })

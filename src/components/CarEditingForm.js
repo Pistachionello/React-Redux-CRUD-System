@@ -6,7 +6,7 @@ import {isEqual} from "lodash";
 import FormikInputs from "./FormikInputs";
 import FormikForm from "./FormikForm";
 
-export default function CarEditingForm({car, id, onEditCancel}) {
+export default function CarEditingForm({car, id, onEditCancel = null, onEditConfirm = null}) {
     const dispatch = useDispatch();
 
     const {name, brand, mileage} = car
@@ -15,10 +15,14 @@ export default function CarEditingForm({car, id, onEditCancel}) {
         brand,
         mileage
     };
+
     const onSubmit = values => {
         const initialCar = {name, brand, mileage};
 
         if (!isEqual(initialCar, values)) {
+            if (onEditConfirm) {
+                onEditConfirm();
+            }
             const {name, brand, mileage} = values;
             const car = new Car(name, brand, mileage);
             onEditCancel();
@@ -35,13 +39,18 @@ export default function CarEditingForm({car, id, onEditCancel}) {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                <FormikInputs binder={carBinder.inputFields}/>
-                <div className="buttons_container d-flex">
-                    <button type={"submit"} className="btn btn-outline-success mr-2">Confirm</button>
-                    <button type={"button"} className="btn btn-outline-danger" onClick={() => onEditCancel()}>Cancel</button>
+                <div className="d-flex">
+                    <FormikInputs binder={carBinder.inputFields}/>
+                </div>
+                <div className="buttons_container d-flex justify-content-end">
+                    <button type={"submit"} className="btn btn-outline-success mr-2">
+                        Confirm
+                    </button>
+                    <button type={"button"} className="btn btn-outline-danger mr-3" onClick={() => onEditCancel()}>
+                        Cancel
+                    </button>
                 </div>
             </FormikForm>
-
         </div>
     );
 }

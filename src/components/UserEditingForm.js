@@ -6,19 +6,23 @@ import {isEqual} from "lodash";
 import FormikForm from "./FormikForm"
 import FormikInputs from "./FormikInputs";
 
-export default function UserEditingForm({id, onEditCancel, user}) {
+export default function UserEditingForm({user, id, onEditCancel = null, onEditConfirm = null}) {
     const dispatch = useDispatch();
 
     const {name, surname, age} = user;
-
     const initialValues = {
         name,
         surname,
         age
     };
+
     const onSubmit = values => {
         const initialUser = {name, surname, age};
+
         if (!isEqual(initialUser, values)) {
+            if (onEditConfirm) {
+                onEditConfirm();
+            }
             const {name, surname, age} = values;
             const user = new User(name, surname, age);
             onEditCancel();
@@ -29,16 +33,22 @@ export default function UserEditingForm({id, onEditCancel, user}) {
     }
 
     return (
-        <div className="user_editing_form border-secondary border-left border-bottom pl-3 pb-3 mb-2">
+        <div className="user_editing_form pl-3 pb-3">
             <FormikForm
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
             >
-                <FormikInputs binder={userBinder.inputFields}/>
-                <div className="buttons_container d-flex">
-                    <button type={"submit"} className="btn btn-outline-success mr-2">Confirm</button>
-                    <button type={"button"} className="btn btn-outline-danger" onClick={() => onEditCancel()}>Cancel</button>
+                <div className="d-flex">
+                    <FormikInputs binder={userBinder.inputFields}/>
+                </div>
+                <div className="buttons_container d-flex justify-content-end">
+                    <button type={"submit"} className="btn btn-outline-success mr-2">
+                        Confirm
+                    </button>
+                    <button type={"button"} className="btn btn-outline-danger mr-3" onClick={() => onEditCancel()}>
+                        Cancel
+                    </button>
                 </div>
             </FormikForm>
         </div>

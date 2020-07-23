@@ -25,6 +25,17 @@ export const userBinder = {
             required: true
         }
     },
+    materialTableFields: {
+        name: {
+            title: "Name",
+        },
+        surname: {
+            title: "Surname",
+        },
+        age: {
+            title: "Age",
+        }
+    },
     ownedCarsIds: {label: "Owned cars:",}
 }
 

@@ -41,15 +41,19 @@ function a11yProps(index) {
     };
 }
 
-const useStyles = makeStyles((theme) => ({
+const tabStyles = makeStyles({
     root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        border: 0,
+        borderRadius: 3,
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        color: 'white',
+        padding: '0 30px',
     },
-}));
+})
 
 export default function SimpleTabs() {
-    const classes = useStyles();
+    const tabClasses = tabStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -57,14 +61,14 @@ export default function SimpleTabs() {
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static">
+        <>
+            <AppBar position="static" className={tabClasses.root}>
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" centered>
                     <Tab label="Users list" {...a11yProps(0)}/>
                     <Tab label="Cars list" {...a11yProps(1)}/>
                 </Tabs>
             </AppBar>
-            <div className="container">
+            <div className="current_list container">
                 <TabPanel value={value} index={0}>
                     <UsersList/>
                 </TabPanel>
@@ -72,6 +76,6 @@ export default function SimpleTabs() {
                     <CarsList/>
                 </TabPanel>
             </div>
-        </div>
+        </>
     );
 }
