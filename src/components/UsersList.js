@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MaterialTable from 'material-table';
-import {Alert} from "@material-ui/lab";
-import {Button} from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import { Button } from "@material-ui/core";
 import Collapse from '@material-ui/core/Collapse';
-import {deleteAllUsers, removeUserById} from "../redux/actions";
+import { deleteAllUsers, removeUserById } from "../redux/actions";
 import UserInfo from "./UserInfo";
 import UserCreationForm from "./UserCreationForm";
-import {userBinder} from "../Objects/User";
-import {tableIcons} from '../MaterialTable/tableIcons';
-import {makeColumns} from '../MaterialTable/makeColumns';
+import { userBinder } from "../Objects/User";
+import { tableIcons } from '../MaterialTable/tableIcons';
+import { makeColumns } from '../MaterialTable/makeColumns';
 
 export function UsersList() {
     const dispatch = useDispatch();
@@ -70,15 +70,22 @@ export function UsersList() {
                         <Alert severity={"error"}>
                             Are you sure you want to delete ALL USERS?
                             <div className="alert_button_container d-flex mt-2">
-                                <Button className="mr-3" variant="outlined" color="primary"
-                                        onClick={() => {
-                                            setOpenImportantAlert(false);
-                                            dispatch(deleteAllUsers());
-                                        }}>
+                                <Button
+                                    className="mr-3"
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => {
+                                        setOpenImportantAlert(false);
+                                        dispatch(deleteAllUsers());
+                                    }}
+                                >
                                     Confirm
                                 </Button>
-                                <Button variant="outlined" color="secondary"
-                                        onClick={() => setOpenImportantAlert(false)}>
+                                <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    onClick={() => setOpenImportantAlert(false)}
+                                >
                                     Cancel
                                 </Button>
                             </div>

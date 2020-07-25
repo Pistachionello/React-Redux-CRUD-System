@@ -88,13 +88,14 @@ function removeCarOwner(carId) {
 
 //--------------------------------------------------
 
+// todo: need to find other solution
 export function addCarAndOwner(userId, carId) {
     return (dispatch) => {
         dispatch(addCarToUser(userId, carId));
         dispatch(addCarOwner(carId, userId));
     }
 }
-
+// todo: need to find other solution
 export function removeCarAndOwner(userId, carId) {
     return (dispatch) => {
         dispatch(removeCarFromUser(userId, carId));
